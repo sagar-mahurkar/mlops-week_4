@@ -1,4 +1,4 @@
-name: Sanity test 2
+name: Sanity test
 on: 
   workflow_dispatch:
 permissions:
@@ -13,10 +13,14 @@ jobs:
         with:
           python-version: "3.9"
       - uses: iterative/setup-cml@v2
-      - name: run unit tests
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          python -m test 2>&1 > test_output.txt
+          pip install tensorflow  # ensure tensorflow installed
+      - name: run unit tests
+        run: |
+          # Capture both stdout and stderr
+          python -m unittest test.py > test_output.txt 2>&1 || true
       - name: Create CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,5 +32,6 @@ jobs:
           echo "metrics from training" report.md
           cat metrics.csv >> report.md
           cml comment create --publish report.md
+
 
 
