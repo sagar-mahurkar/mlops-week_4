@@ -32,7 +32,7 @@ class TestModel(unittest.TestCase):
         outputlayer = Model(inputs=self.base_model.input, outputs=self.base_model.get_layer(layer_name).output)
         converted_img = outputlayer.predict(sample)
         converted_img = converted_img[0]
-        resized_sample = resize(converted_img, size(4, 4))
+        resized_sample = resize(converted_img, (4, 4))
 
         # get batch dimension representation
         resized = np.expand_dims(resized_sample, axis = 0)
