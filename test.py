@@ -38,7 +38,7 @@ class TestModel(unittest.TestCase):
         resized = np.expand_dims(resized_sample, axis = 0)
         return resized
     
-    def test_sample(self):
+    def test_sample1(self):
         sample1 = self.samples_path+"/sample1.jpg"
         resized = self.convert_img(sample1)
         result = self.restored_model.predict(resized)
