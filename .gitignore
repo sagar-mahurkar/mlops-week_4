@@ -1,4 +1,5 @@
 .env
 /data
 /model.weights.h5
-/model.keras
+/bottleneck_features_train.npy
+/bottleneck_features_validation.npy
